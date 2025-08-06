@@ -35,6 +35,22 @@ Route::get('/', function () {
     return Inertia::render('Home');
 })->name('home');
 
+// GandhiHouse page
+Route::get('/house/gandhi', function () {
+    return Inertia::render('GandhiHouse');
+
+})->name('gandhiHouse');
+
+// nehruHouse page
+Route::get('/house/nehru', function () {
+    return Inertia::render('NehruHouse');
+})->name('nehruHouse');
+
+// Subash page
+Route::get('/house/subhash', function () {
+    return Inertia::render('SubashHouse');
+})->name('subashHouse');
+
 /*
 |--------------------------------------------------------------------------
 | School Admin Routes (Protected)
