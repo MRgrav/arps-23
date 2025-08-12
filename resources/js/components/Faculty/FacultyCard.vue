@@ -22,10 +22,10 @@ const handleImageError = (event: Event) => {
                 class="w-full h-full object-cover" @error="handleImageError" alt="Profile Image" />
             <img v-else :src="defaultProfileIcon" alt="">
         </div>
-        <div class="p-4 bg-[#ff7c7c] text-white text-center">
-            <h3>
+        <div class="p-4 bg-[#ff7c7c] text-white text-center h-full">
+            <h4>
                 {{ props.profile.name || "Please enter name" }}
-            </h3>
+            </h4>
             <p class="opacity-70 font-semibold">
                 {{ props.profile.detail || "Please enter a details" }}
             </p>
