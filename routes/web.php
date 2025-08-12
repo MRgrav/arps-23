@@ -12,6 +12,7 @@ use App\Http\Controllers\ProfileController;
 use App\Models\Notification;
 use App\Models\Post;
 use App\Models\Profile;
+use App\Models\Registration;
 
 /*
 |--------------------------------------------------------------------------
@@ -362,7 +363,14 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
 
         // Dashboard page
         Route::get('/dashboard', function () {
-            return Inertia::render('school-admin/Dashboard');
+            $total_registrations = Registration::count();
+            $total_staffs = Profile::count();
+            $total_departments = Department::count();
+            return Inertia::render('school-admin/Dashboard', [
+                "total_registrations" => $total_registrations,
+                "total_staffs" => $total_staffs,
+                "total_departments" => $total_departments
+            ]);
         })->name('dashboard');
 
         // List all registrations
