@@ -27,6 +27,8 @@ const props = defineProps<Props>() // Make props reactive and type-safe.
     <Head title="Home">
         <link rel="preconnect" href="https://rsms.me/" />
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+        <meta property="og:title" content="Assam Rifles Public School, Jorhat | Jorhat ">
+        <meta property="og:description" content="Assam Rifles Public School, Jorhat, Jorhat. KNOWLEDGE IS WORSHIP">
     </Head>
     <AppLayout>
         <Hero />
