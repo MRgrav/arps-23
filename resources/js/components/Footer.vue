@@ -87,43 +87,66 @@ const AddressItems: NavItem[] = [
 
 <template>
     <div class="footer">
-        <div class="footer-top grid text-center md:text-left grid-cols-1 md:grid-cols-4 p-10 bg-[#182333] text-gray-400 small font-medium gap-x-8 gap-y-4">
-            <div class="flex flex-col justify-center items-center text-center">
-                <div class="size-20">
-                    <AppLogoIcon/>
+        <div class="bg-[#182333] px-8 py-20">
+            <div class="text-gray-400 flex-col justify-center max-w-7xl mx-auto">
+                <div class="flex gap-5">
+                    <div class="size-20">
+                        <AppLogoIcon />
+                    </div>
+                    <div class="my-auto">
+                        <h5 class="text-gray-200">Assam Rifles Public School</h5>
+                        <span class="font-semibold">
+                            Jorhat Established in 1977, affiliated to CBSE.
+                        </span>
+                    </div>
                 </div>
-                <p>
-                   <span class="font-semibold"> Assam Rifles Public School, Jorhat Established in 1977, affiliated to CBSE.</span>
-                    <br/>
+                <p class="mt-5">
                     Offering quality education guided by a dedicated team of trained educators.
                 </p>
+                <hr class="border-white/20 my-10">
             </div>
-            <div class="flex flex-col items-center md:items-start">
-                <h4 class="text-white mb-3">Quick Links</h4>
-                <Link class="pb-1 small relative after:bg-gray-300 after:absolute after:h-[1.5px] after:w-0 after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-300 cursor-pointer w-fit" v-for="item in QuickLinksItems" :key="item.title" :href="item.href">{{ item.title }}</Link>
-            </div>
-            <div class="flex flex-col items-center md:items-start">
-                <h4 class="text-white mb-3">Information</h4>
-                <Link class="pb-1 small relative after:bg-gray-300 after:absolute after:h-[1.5px] after:w-0 after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-300 cursor-pointer w-fit" v-for="item in InformationItems" :key="item.title" :href="item.href">{{ item.title }}</Link>
-            </div>
-            <div class="flex flex-col items-center md:items-start">
-                <h4 class="text-white mb-3">Address</h4>
-                <a target="_blank" rel="noopener noreferrer" class="pb-1 small relative after:bg-gray-300 after:absolute after:h-[2px] after:w-0 after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-300 cursor-pointer w-fit" v-for="item in AddressItems" :key="item.title" :href="item.href">
-                    <span class="flex items-center">
-                        <component :is="item.icon" class="size-4 mr-2" />
-                        {{ item.title }}
-                    </span>
-                </a>
+
+
+            <div
+                class="footer-top grid text-left grid-cols-2 md:grid-cols-3 text-gray-400 small font-medium gap-x-8 gap-y-8 max-w-7xl mx-auto">
+                <div class="flex flex-col items-start">
+                    <h4 class="text-white mb-3">Quick Links</h4>
+                    <Link
+                        class="pb-1 small relative after:bg-gray-300 after:absolute after:h-[1.5px] after:w-0 after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-300 cursor-pointer w-fit"
+                        v-for="item in QuickLinksItems" :key="item.title" :href="item.href">{{ item.title }}</Link>
+                </div>
+                <div class="flex flex-col items-start">
+                    <h4 class="text-white mb-3">Information</h4>
+                    <Link
+                        class="pb-1 small relative after:bg-gray-300 after:absolute after:h-[1.5px] after:w-0 after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-300 cursor-pointer w-fit"
+                        v-for="item in InformationItems" :key="item.title" :href="item.href">{{ item.title }}</Link>
+                </div>
+                <div class="flex flex-col items-start">
+                    <h4 class="text-white mb-3">Address</h4>
+                    <a target="_blank" rel="noopener noreferrer"
+                        class="pb-1 small relative after:bg-gray-300 after:absolute after:h-[2px] after:w-0 after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-300 cursor-pointer w-fit"
+                        v-for="item in AddressItems" :key="item.title" :href="item.href">
+                        <span class="flex items-center">
+                            <component :is="item.icon" class="size-4 mr-2" />
+                            {{ item.title }}
+                        </span>
+                    </a>
+                </div>
             </div>
         </div>
-        <div class="footer-bottom grid grid-cols-1 md:grid-cols-2 p-10 bg-[#021526] text-white small gap-y-4">
-            <div class="flex flex-col items-center text-center md:items-start">
-                <span class="text-gray-400">©2025 ARPS, Jorhat, All Rights Reserved.</span>
-                <a href="https://www.deolang.com/" target="_blank" class="text-blue-800 font-semibold">Powered by DeoLang</a>
-            </div>
-            <div class="flex flex-col items-center md:items-end">
-                <!-- <span class="text-right text-gray-500">Today's visitors: 17</span> -->
-                <!-- <span class="text-right text-gray-500">Total visitors : 1,188</span> -->
+
+        <div class="bg-[#021526] p-8">
+            <div
+                class="footer-bottom grid grid-cols-1 md:grid-cols-2 text-white small gap-y-8 max-w-7xl mx-auto">
+                <div class="flex flex-col items-center text-center md:items-start">
+                    <span class="text-gray-400">©2025 ARPS, Jorhat, All Rights Reserved.</span>
+                    <a href="https://www.deolang.com/" target="_blank" class="text-blue-800 font-semibold">Powered by
+                        DeoLang</a>
+                </div>
+                <div class="flex flex-col items-center md:items-end">
+                    <!-- <span class="text-right text-gray-500">Today's visitors: 17</span> -->
+                    <!-- <span class="text-right text-gray-500">Total visitors : 1,188</span> -->
+                </div>
             </div>
         </div>
     </div>
