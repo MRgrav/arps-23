@@ -12,21 +12,21 @@ const carouselConfig = {
 </script>
 
 <template>
-  <div class="relative w-full h-[550px] overflow-hidden">
+  <div class="relative w-full h-[70vh] overflow-hidden">
     <Carousel v-bind="carouselConfig" class="w-full h-full">
       <Slide v-for="index in 4" :key="index">
-        <div class="w-full h-[550px]">
+        <div class="w-full h-[70vh]">
           <img
             :src="`/storage/uploads/hero-${index}.jpeg`"
             alt="Hero Slide"
-            class="w-full h-full object-cover"
+            class="w-full h-full object-cover object-center"
           />
         </div>
       </Slide>
     </Carousel>
 
     <!-- ✅ Centered Overlay Content -->
-    <div class="absolute inset-0 flex justify-center items-end p-8">
+    <div class="absolute inset-0 flex justify-center items-end p-8 lg:pb-16">
       <div class="z-10 bg-blue-600/50 p-6 text-white">
         <span>Welcome to</span>
         <h1><span class="text-[#ffeb00]">ARPS</span> Jorhat</h1>
