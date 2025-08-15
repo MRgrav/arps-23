@@ -9,6 +9,7 @@ import AboutUs from '@/components/Home/AboutUs.vue';
 import Stats from '@/components/Home/Stats.vue';
 import Activities from '@/components/Home/Activities.vue';
 import { Post, Profile } from '@/types';
+// import OurSchoolFamily from '@/components/Home/OurSchoolFamily.vue';
 
 /**
  * Props definition
@@ -33,21 +34,11 @@ const props = defineProps<Props>() // Make props reactive and type-safe.
     <AppLayout>
         <Hero />
         <AboutAndNotification :notifications="props.notifications"/>
-        <div class="p-8">
-            <div class="flex justify-center">
-                <h2 class="mt-20 text-[#4e71ff] border-[#4e71ff] px-3">Messages From​</h2>
-            </div>
-            <div class="flex justify-center my-25">
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-15">
-                    <div class="md:max-w-[350px]" v-for="(profile, index) in props.profiles" :key="index">
-                        <MessageCard v-if="profile" :profile="profile"/>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <MessageCard :profiles="props.profiles"/>
         <NewsAndEvents :posts="props.posts"/>
         <Stats/>
         <Activities/>
         <AboutUs/>
+        <!-- <OurSchoolFamily/> -->
     </AppLayout>
 </template>
