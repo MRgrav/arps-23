@@ -22,7 +22,7 @@ const handleImageError = (event: Event) => {
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 py-10">
                 <Link v-for="(profile, key, index) in props.profiles" :href="`/profiles/${profile.id}`" :key="profile.id"
                     data-aos="fade-up" data-aos-duration="400" data-aos-easing="ease-in-out" :data-aos-delay="200 * index"
-                    class="bg-[var(--primary-brand-500)]/80 hover:scale-101 w-full max-w-[400px]  mx-auto transition duration-400 ease-in-out rounded-xs block shadow-md h-full">
+                    class="bg-[var(--primary-brand-500)]/80 w-full max-w-[400px] mx-auto rounded-xs block shadow-md h-full">
                 <div
                     class="-translate-1 hover:-translate-1.5 bg-white w-full h-full border-[var(--primary-brand-500)]/80 border transition duration-400 ease-in-out">
                     <div class="aspect-[1/1] object-center object-cover relative">
