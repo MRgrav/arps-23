@@ -18,9 +18,10 @@ const handleImageError = (event: Event) => {
 <template>
     <div class="px-8 py-16 bg-neutral-50">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-center py-10 text-[#4e71ff]">Leadership Messages</h2>
+            <h2 class="text-center py-10 text-[#4e71ff]" data-aos="fade-in">Leadership Messages</h2>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 py-10">
-                <Link v-for="profile in props.profiles" :href="`/profiles/${profile.id}`" :key="profile.id"
+                <Link v-for="(profile, key, index) in props.profiles" :href="`/profiles/${profile.id}`" :key="profile.id"
+                    data-aos="fade-up" data-aos-duration="400" data-aos-easing="ease-in-out" :data-aos-delay="200 * index"
                     class="bg-[var(--primary-brand-500)]/80 hover:scale-101 w-full max-w-[400px]  mx-auto transition duration-400 ease-in-out rounded-xs block shadow-md h-full">
                 <div
                     class="-translate-1 hover:-translate-1.5 bg-white w-full h-full border-[var(--primary-brand-500)]/80 border transition duration-400 ease-in-out">

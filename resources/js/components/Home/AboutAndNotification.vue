@@ -17,7 +17,7 @@ const props = defineProps<Props>() // Make props reactive and type-safe.
 <template>
     <div class="bg-[var(--primary-brand-500)] p-8 py-16">
         <div class="grid grid-cols-1 lg:grid-cols-2 text-white gap-10 max-w-7xl mx-auto">
-            <div class="grid place-content-center gap-6">
+            <div class="grid place-content-center gap-6" data-aos="fade-right">
                 <h2>About Us</h2>
                 <p>
                     Established in 1977, Assam Rifles Junior School in Jorhat we’re a CBSE-affiliated institution
@@ -28,7 +28,7 @@ const props = defineProps<Props>() // Make props reactive and type-safe.
                     development. — helping our students build a strong foundation for the future.
                 </p>
             </div>
-            <div class="bg-[url('/storage/uploads/hero-1.jpeg')] bg-cover bg-center">
+            <div class="bg-[url('/storage/uploads/hero-1.jpeg')] bg-cover bg-center" data-aos="fade-left">
                 <div class="bg-blue-950/97 py-8 backdrop-blur-xs px-10">
                     <div class="flex justify-center">
                         <h2 class="border-l-6 mb-8 border-white ps-6 ">Notifications</h2>

@@ -5,12 +5,12 @@ import { UserPen, GraduationCapIcon } from 'lucide-vue-next';
 <template>
         <div class="bg-gradient-to-b p-8 py-16">
             <div class="max-w-7xl mx-auto">
-                <h2 class="text-center text-[#4e71ff] py-10">Heart of Our Success</h2>
+                <h2 class="text-center text-[#4e71ff] py-10" data-aos="fade-in">Heart of Our Success</h2>
         
                 <!-- hide on mobile and tablate -->
                 <div class="hidden lg:block">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 py-10">
-                        <div>
+                        <div data-aos="fade-right" data-aos-duration="400">
                             <h3
                                 class="text-[var(--primary-brand-500)] border-[var(--primary-brand-500)] p-3 mb-2 border-b-1 border-l-5">
                                 Teachers & Staffs
@@ -22,7 +22,7 @@ import { UserPen, GraduationCapIcon } from 'lucide-vue-next';
                                 welcoming environment for all.
                             </p>
                         </div>
-                        <div class="flex flex-col">
+                        <div class="flex flex-col" data-aos="fade-left" data-aos-duration="400">
                             <div class="flex justify-center">
                                 <svg class="size-20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
                                     <rect width="256" height="256" fill="none" />
@@ -46,7 +46,7 @@ import { UserPen, GraduationCapIcon } from 'lucide-vue-next';
                         </div>
                     </div>
                     <div class="grid grid-cols-1 lg:grid-cols-2  gap-4 py-10">
-                        <div class="flex flex-col">
+                        <div class="flex flex-col" data-aos="fade-right" data-aos-duration="400">
                             <div class="flex justify-center">
                                 <UserPen class="size-20" />
                             </div>
@@ -54,7 +54,7 @@ import { UserPen, GraduationCapIcon } from 'lucide-vue-next';
                                 712+
                             </p>
                         </div>
-                        <div>
+                        <div data-aos="fade-left" data-aos-duration="400">
                             <h3
                                 class="text-[var(--primary-brand-500)] border-[var(--primary-brand-500)] p-3 mb-2 border-b-1 border-r-5 text-end">
                                 Students
@@ -67,7 +67,7 @@ import { UserPen, GraduationCapIcon } from 'lucide-vue-next';
                         </div>
                     </div>
                     <div class="grid grid-cols-1 lg:grid-cols-2  gap-4 py-10">
-                        <div>
+                        <div data-aos="fade-right" data-aos-duration="400">
                             <h3
                                 class="text-[var(--primary-brand-500)] border-[var(--primary-brand-500)] p-3 mb-2 border-b-1 border-l-5">
                                 Alumni
@@ -78,7 +78,7 @@ import { UserPen, GraduationCapIcon } from 'lucide-vue-next';
                                 back to guide those who follow.
                             </p>
                         </div>
-                        <div class="flex flex-col">
+                        <div class="flex flex-col" data-aos="fade-left" data-aos-duration="400">
                             <div class="flex justify-center">
                                 <GraduationCapIcon class="size-20" />
                             </div>
@@ -91,8 +91,8 @@ import { UserPen, GraduationCapIcon } from 'lucide-vue-next';
         
                 <!-- hide on desktop -->
                 <div class="lg:hidden">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 py-10">
-                        <div class="flex flex-col">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="flex flex-col" gap-4 data-aos="fade-right" data-aos-duration="400">
                             <div class="flex justify-center">
                                 <svg class="size-20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
                                     <rect width="256" height="256" fill="none" />
@@ -114,7 +114,7 @@ import { UserPen, GraduationCapIcon } from 'lucide-vue-next';
                                 71+
                             </p>
                         </div>
-                        <div>
+                        <div gap-4 data-aos="fade-left" data-aos-duration="400">
                             <h3
                                 class="text-[var(--primary-brand-500)] border-[var(--primary-brand-500)] p-3 mb-2 border-b-1 border-l-5">
                                 Teachers & Staffs
@@ -128,7 +128,7 @@ import { UserPen, GraduationCapIcon } from 'lucide-vue-next';
                         </div>
                     </div>
                     <div class="grid grid-cols-1 lg:grid-cols-2  gap-4 py-10">
-                        <div class="flex flex-col">
+                        <div class="flex flex-col" gap-4 data-aos="fade-right" data-aos-duration="400">
                             <div class="flex justify-center">
                                 <UserPen class="size-20" />
                             </div>
@@ -136,7 +136,7 @@ import { UserPen, GraduationCapIcon } from 'lucide-vue-next';
                                 712+
                             </p>
                         </div>
-                        <div>
+                        <div gap-4 data-aos="fade-left" data-aos-duration="400">
                             <h3
                                 class="text-[var(--primary-brand-500)] border-[var(--primary-brand-500)] p-3 mb-2 border-b-1 border-r-5 text-end">
                                 Students
@@ -151,7 +151,7 @@ import { UserPen, GraduationCapIcon } from 'lucide-vue-next';
                         </div>
                     </div>
                     <div class="grid grid-cols-1 lg:grid-cols-2  gap-4 py-10">
-                        <div class="flex flex-col">
+                        <div class="flex flex-col" gap-4 data-aos="fade-right" data-aos-duration="400">
                             <div class="flex justify-center">
                                 <GraduationCapIcon class="size-20" />
                             </div>
@@ -159,7 +159,7 @@ import { UserPen, GraduationCapIcon } from 'lucide-vue-next';
                                 5,123+
                             </p>
                         </div>
-                        <div>
+                        <div gap-4 data-aos="fade-left" data-aos-duration="400">
                             <h3
                                 class="text-[var(--primary-brand-500)] border-[var(--primary-brand-500)] p-3 mb-2 border-b-1 border-l-5">
                                 Alumni

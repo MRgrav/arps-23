@@ -27,12 +27,12 @@ const carouselConfig = {
 
     <!-- ✅ Centered Overlay Content -->
     <div class="absolute inset-0 flex justify-center items-end p-8 lg:pb-16">
-      <div class="z-10 bg-blue-600/50 p-6 text-white">
+      <div class="z-10 bg-blue-600/50 p-6 text-white" data-aos="fade-right">
         <span>Welcome to</span>
         <h1><span class="text-[#ffeb00]">ARPS</span> Jorhat</h1>
         <span>This is where we teach students skills they need to transform themselves, others, and our global communities.</span>
-        <div class="flex justify-center mt-5">
-            <Link :href="`online-registration`" class="bg-[#ff5544] hover:bg-[#ff6655] hover:scale-102 rounded-xs py-2 px-4 flex items-center ease-in-out duration-300">
+        <div class="flex justify-center mt-5" data-aos="fade-right">
+            <Link  :href="`online-registration`" class="bg-[#ff5544] hover:bg-[#ff6655] hover:scale-102 rounded-xs py-2 px-4 flex items-center ease-in-out duration-300">
                 <span>Addmission Now</span>
                 <ArrowUpRight class="inline ml-1 stroke-[2.5] w-4 h-4 text-current" />
             </Link>

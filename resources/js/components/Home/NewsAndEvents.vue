@@ -16,11 +16,12 @@ const props = defineProps<Props>() // Make props reactive and type-safe.
 <template>
   <div class="bg-[#4e71ff] px-8">
     <div class="py-16 max-w-7xl mx-auto">
-      <h2 class="text-center text-white py-10 font-semibold">News & Events</h2>
+      <h2 class="text-center text-white py-10 font-semibold" data-aos="fade-in">News & Events</h2>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 py-10">
-        <Link :href="`/news-events/${post.id}`" v-for="post in props.posts" :key="post.id"
+        <Link :href="`/news-events/${post.id}`" v-for="(post, index) in props.posts" :key="post.id"
           class="h-64 border border-blue-200 bg-cover bg-center bg-no-repeat border-r-4 border-b-4 transform transition duration-300 hover:scale-101 relative"
+          data-aos="fade-up" data-aos-duration="400" data-aos-easing="ease-in-out" :data-aos-delay="100 * index"
           :style="{ backgroundImage: `url('/storage/uploads/${post.image}')` }">
         <div
           class=" bg-[#022CB84F] hover:bg-[#012DB8B5] flex flex-col justify-end transition-colors duration-300 h-full">
