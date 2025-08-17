@@ -6,6 +6,14 @@ import type { DefineComponent } from 'vue';
 import { createApp, h } from 'vue';
 import { ZiggyVue } from 'ziggy-js';
 import { initializeTheme } from './composables/useAppearance';
+// @ts-expect-error as it is a js library
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+AOS.init({
+    duration: 500,
+    once: true,
+    easing: 'ease-in-out',
+})
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 

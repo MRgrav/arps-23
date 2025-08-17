@@ -5,11 +5,10 @@ import Hero from '@/components/Home/Hero.vue';
 import AboutAndNotification from '@/components/Home/AboutAndNotification.vue';
 import MessageCard from '@/components/Home/MessageCard.vue';
 import NewsAndEvents from '@/components/Home/NewsAndEvents.vue';
-import AboutUs from '@/components/Home/AboutUs.vue';
 import Stats from '@/components/Home/Stats.vue';
 import Activities from '@/components/Home/Activities.vue';
 import { Post, Profile } from '@/types';
-// import OurSchoolFamily from '@/components/Home/OurSchoolFamily.vue';
+import OurSchoolFamily from '@/components/Home/OurSchoolFamily.vue';
 
 /**
  * Props definition
@@ -38,7 +37,6 @@ const props = defineProps<Props>() // Make props reactive and type-safe.
         <NewsAndEvents :posts="props.posts"/>
         <Stats/>
         <Activities/>
-        <AboutUs/>
-        <!-- <OurSchoolFamily/> -->
+        <OurSchoolFamily/>
     </AppLayout>
 </template>
