@@ -195,9 +195,7 @@ Route::prefix('/laboratory')->group(function () {
 });
 
 Route::get('/classrooms', function () {
-    return Inertia::render('CommingSoon',[
-        'title' => "Classrooms"
-    ]);
+    return Inertia::render('Classrooms/Index');
 });
 
 Route::get('/library', function () {
