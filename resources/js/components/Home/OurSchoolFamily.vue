@@ -60,7 +60,7 @@ const members = {
             </div>
 
             <div v-for="(member, index) in members" :key="index">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 bg-white/50 my-10" v-if="activeTab.key === index">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-20 gap-y-5 bg-white/50 my-10" v-if="activeTab.key === index">
                     <div class="col-span-1 overflow-hidden w-full h-90" data-aos="fade-right" data-aos-duration="500"
                         data-aos-easing="ease-in-out">
                         <img :src="`/storage/uploads/${member.img}`" :alt="member.name"
