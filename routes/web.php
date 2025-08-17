@@ -14,6 +14,8 @@ use App\Models\Post;
 use App\Models\Profile;
 use App\Models\Registration;
 
+use function Pest\Laravel\get;
+
 /*
 |--------------------------------------------------------------------------
 | Public Routes
@@ -68,7 +70,7 @@ Route::get('/holiday-list', function () {
 });
 
 Route::get('/school-timing', function () {
-    return Inertia::render('CommingSoon',[
+    return Inertia::render('CommingSoon', [
         'title' => "School Timing"
     ]);
 });
@@ -78,13 +80,13 @@ Route::get('/school-uniform', function () {
 });
 
 Route::get('/list-of-books', function () {
-    return Inertia::render('CommingSoon',[
+    return Inertia::render('CommingSoon', [
         'title' => "List of Books"
     ]);
 });
 
 Route::get('/subjects-offered', function () {
-    return Inertia::render('CommingSoon',[
+    return Inertia::render('CommingSoon', [
         'title' => "Subjects Offered"
     ]);
 });
@@ -108,7 +110,7 @@ Route::get('/news-events/{id}', function (int $id) {
 })->whereNumber('id');
 
 Route::get('/sports-calendar', function () {
-    return Inertia::render('CommingSoon',[
+    return Inertia::render('CommingSoon', [
         'title' => "Sports Calendar"
     ]);
 });
@@ -147,13 +149,13 @@ Route::get('/fees-structure', function () {
 });
 
 Route::get('/testimonials', function () {
-    return Inertia::render('CommingSoon',[
+    return Inertia::render('CommingSoon', [
         'title' => "Testimonials"
     ]);
 });
 
 Route::get('/office-remittances', function () {
-    return Inertia::render('CommingSoon',[
+    return Inertia::render('CommingSoon', [
         'title' => "Office Remittances"
     ]);
 });
@@ -163,13 +165,13 @@ Route::get('/transfer-certificate', function () {
 });
 
 Route::get('/orientation-program', function () {
-    return Inertia::render('CommingSoon',[
+    return Inertia::render('CommingSoon', [
         'title' => "Orientation Program"
     ]);
 });
 
 Route::get('/age-limits', function () {
-    return Inertia::render('CommingSoon',[
+    return Inertia::render('CommingSoon', [
         'title' => "Age Limits"
     ]);
 });
@@ -199,25 +201,25 @@ Route::get('/classrooms', function () {
 });
 
 Route::get('/library', function () {
-    return Inertia::render('CommingSoon',[
+    return Inertia::render('CommingSoon', [
         'title' => "Library"
     ]);
 });
 
 Route::get('/playground-sports', function () {
-    return Inertia::render('CommingSoon',[
+    return Inertia::render('CommingSoon', [
         'title' => "Playground Sport"
     ]);
 });
 
 Route::get('/creative-performing-arts', function () {
-    return Inertia::render('CommingSoon',[
+    return Inertia::render('CommingSoon', [
         'title' => "Creative Performing Arts"
     ]);
 });
 
 Route::get('/medical-care', function () {
-    return Inertia::render('CommingSoon',[
+    return Inertia::render('CommingSoon', [
         'title' => "Medical Care"
     ]);
 });
@@ -226,31 +228,31 @@ Route::get('/medical-care', function () {
 /**
  * Activities Section
  */
- Route::prefix('/house')->group(function () {
+Route::prefix('/house')->group(function () {
     Route::get('/gandhi', function () {
-        return Inertia::render('CommingSoon',[
+        return Inertia::render('CommingSoon', [
             'title' => "Gandhi House"
         ]);
     });
     Route::get('/nehru', function () {
-        return Inertia::render('CommingSoon',[
+        return Inertia::render('CommingSoon', [
             'title' => "Nehru House"
         ]);
     });
     Route::get('/subhash', function () {
-        return Inertia::render('CommingSoon',[
+        return Inertia::render('CommingSoon', [
             'title' => "Subhash House"
         ]);
     });
     Route::get('/tagore', function () {
-        return Inertia::render('CommingSoon',[
+        return Inertia::render('CommingSoon', [
             'title' => "Tagore House"
         ]);
     });
- });
+});
 
 Route::get('/sports', function () {
-    return Inertia::render('CommingSoon',[
+    return Inertia::render('CommingSoon', [
         'title' => "Sports"
     ]);
 });
@@ -260,7 +262,7 @@ Route::get('/sports', function () {
  * Achievements Section
  */
 Route::get('/academic-achievements', function () {
-    return Inertia::render('CommingSoon',[
+    return Inertia::render('CommingSoon', [
         'title' => "Academic Achievements"
     ]);
 });
@@ -268,7 +270,7 @@ Route::get('/academic-achievements', function () {
 
 /** 
  * Notifications page
-*/
+ */
 Route::get('/notifications', function () {
     $notifications = Notification::orderBy('created_at', 'desc')
         ->get();
@@ -298,7 +300,6 @@ Route::get('/faculty', function () {
         'departments' => $departments,
         'profiles' => $profiles,
     ]);
-
 })->name('faculty');
 
 // Profile page of people
@@ -312,37 +313,51 @@ Route::get('/profiles/{id}', function (int $id) {
 
 
 Route::get('/about', function () {
-    return Inertia::render('CommingSoon',[
+    return Inertia::render('CommingSoon', [
         'title' => "About Us"
     ]);
 });
 
 Route::get('/magazine', function () {
-    return Inertia::render('CommingSoon',[
+    return Inertia::render('CommingSoon', [
         'title' => "Magazine"
     ]);
 });
 
 Route::get('/staff', function () {
-    return Inertia::render('CommingSoon',[
-        'title' => "Staff"
+
+    $roles = Role::whereNotIn('name', [
+        'teacher',
+        'assistant_teacher',
+        'principal',
+        'vice_principal',
+        'coordinator'
+    ])
+    ->withCount('profiles')
+    ->get();
+
+    $profiles = Profile::all();
+
+    return Inertia::render('Staff/Index', [
+        'roles' => $roles,
+        'profiles' => $profiles
     ]);
 });
 
 Route::get('/rules-regulations', function () {
-    return Inertia::render('CommingSoon',[
+    return Inertia::render('CommingSoon', [
         'title' => "Rules Regulations"
     ]);
 });
 
 Route::get('/results', function () {
-    return Inertia::render('CommingSoon',[
+    return Inertia::render('CommingSoon', [
         'title' => "Results"
     ]);
 });
 
 Route::get('/career', function () {
-    return Inertia::render('CommingSoon',[
+    return Inertia::render('CommingSoon', [
         'title' => "Career"
     ]);
 });
@@ -468,7 +483,6 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
 
         Route::get('/posts/{id}', [PostController::class, 'show'])
             ->name('school-admin.posts.show');
-
     });
 });
 
