@@ -13,7 +13,7 @@ import { Link } from '@inertiajs/vue3';
             <h2 class="text-center py-10" data-aos="fade-in">Our Activities</h2>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 py-10">
-                <div class="flex flex-col justify-center" data-aos="fade-up-right" data-aos-duration="400">
+                <div class="flex flex-col justify-center" data-aos="fade-right" data-aos-duration="400">
                     <h3 class="border-blue-200 p-3 mb-2 border-b-1 border-l-5">
                         NCC at a Glance
                     </h3>
@@ -24,7 +24,7 @@ import { Link } from '@inertiajs/vue3';
                         welcoming environment for all.
                     </p>
                 </div>
-                <Link :href="'/ncc'" class="flex flex-col" data-aos="fade-up-left" data-aos-duration="400">
+                <Link :href="'/ncc'" class="flex flex-col" data-aos="fade-left" data-aos-duration="400">
                 <!-- <div > -->
                 <img class="h-80 border border-blue-200 bg-cover object-cover bg-center bg-no-repeat border-r-4 border-b-4 transform transition duration-300 hover:scale-101 relative"
                     :src="nccImage" alt="">
@@ -32,7 +32,7 @@ import { Link } from '@inertiajs/vue3';
                 </Link>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 py-10">
-                <div class="flex flex-col justify-center lg:hidden" data-aos="fade-up-left" data-aos-duration="400">
+                <div class="flex flex-col justify-center lg:hidden" data-aos="fade-left" data-aos-duration="400">
                     <h3 class="border-blue-200 p-3 mb-2 border-b-1 border-l-5">
                         Sports at a Glance
                     </h3>
@@ -43,13 +43,13 @@ import { Link } from '@inertiajs/vue3';
                         nurture discipline, resilience, and all-round development.
                     </p>
                 </div>
-                <Link :href="'/sports'" class="flex flex-col" data-aos="fade-up-right" data-aos-duration="400">
+                <Link :href="'/sports'" class="flex flex-col" data-aos="fade-right" data-aos-duration="400">
                 <!-- <div > -->
                 <img class="h-80 border border-blue-200 bg-cover object-cover bg-center bg-no-repeat border-r-4 border-b-4 transform transition duration-300 hover:scale-101 relative"
                     :src="sportImage" alt="">
                 <!-- </div> -->
                 </Link>
-                <div class="hidden lg:flex flex-col justify-center" data-aos="fade-up-left" data-aos-duration="400">
+                <div class="hidden lg:flex flex-col justify-center" data-aos="fade-left" data-aos-duration="400">
                     <h3 class="border-blue-200 p-3 mb-2 border-b-1 border-l-5">
                         Sports at a Glance
                     </h3>
@@ -63,7 +63,7 @@ import { Link } from '@inertiajs/vue3';
 
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 py-10">
-                <div class="flex flex-col justify-center" data-aos="fade-up-right" data-aos-duration="400">
+                <div class="flex flex-col justify-center" data-aos="fade-right" data-aos-duration="400">
                     <h3 class="border-blue-200 p-3 mb-2 border-b-1 border-l-5">
                         Cultural Activities
                     </h3>
@@ -73,7 +73,7 @@ import { Link } from '@inertiajs/vue3';
                         tradition. Every student is encouraged to explore and showcase their unique talents.
                     </p>
                 </div>
-                <Link :href="'creative-performing-arts'" class="flex flex-col" data-aos="fade-up-left" data-aos-duration="400">
+                <Link :href="'creative-performing-arts'" class="flex flex-col" data-aos="fade-left" data-aos-duration="400">
                 <!-- <div > -->
                 <img class="h-80 border border-blue-200 bg-cover object-cover bg-center bg-no-repeat border-r-4 border-b-4 transform transition duration-300 hover:scale-101 relative"
                     :src="cultureImage" alt="">
