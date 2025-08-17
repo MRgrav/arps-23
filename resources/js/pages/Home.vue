@@ -30,7 +30,7 @@ const props = defineProps<Props>() // Make props reactive and type-safe.
         <meta property="og:title" content="Assam Rifles Public School, Jorhat | Jorhat ">
         <meta property="og:description" content="Assam Rifles Public School, Jorhat, Jorhat. KNOWLEDGE IS WORSHIP">
     </Head>
-    <AppLayout>
+    <AppLayout class="overflow-hidden">
         <Hero />
         <AboutAndNotification :notifications="props.notifications"/>
         <MessageCard :profiles="props.profiles"/>
