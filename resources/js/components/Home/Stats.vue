@@ -1,6 +1,40 @@
 <script setup lang="ts">
 import { UserPen, GraduationCapIcon } from 'lucide-vue-next';
+import { onMounted, ref } from 'vue';
+import Vue3Autocounter from 'vue3-autocounter';
 
+/**
+ * Couner logic to only start counting when visible
+ */
+const teachersRef = ref();
+const studentsRef = ref();
+const alumniRef = ref();
+
+onMounted(() => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          teachersRef.value.start(); // start counting
+          studentsRef.value.start(); // start counting
+          alumniRef.value.start(); // start counting
+          observer.unobserve(entry.target); // run only once
+        }
+      });
+    },
+    { threshold: 0.3 }
+  );
+
+  if (teachersRef.value?.$el) {
+    observer.observe(teachersRef.value.$el);
+  }
+  if (studentsRef.value?.$el) {
+    observer.observe(studentsRef.value.$el);
+  }
+  if (alumniRef.value?.$el) {
+    observer.observe(alumniRef.value.$el);
+  }
+});
 </script>
 <template>
         <div class="bg-gradient-to-b p-8 py-16">
@@ -41,7 +75,7 @@ import { UserPen, GraduationCapIcon } from 'lucide-vue-next';
                                 </svg>
                             </div>
                             <p class="text-center text-6xl font-bold text-purple-500">
-                                71+
+                                <Vue3Autocounter ref="teachersRef" :startAmount='0' :endAmount='71' :duration='1' suffix='+' />
                             </p>
                         </div>
                     </div>
@@ -51,7 +85,7 @@ import { UserPen, GraduationCapIcon } from 'lucide-vue-next';
                                 <UserPen class="size-20" />
                             </div>
                             <p class="text-center text-6xl font-bold text-purple-500">
-                                712+
+                                 <Vue3Autocounter ref="studentsRef" :startAmount='0' :endAmount='712' :duration='1' suffix='+' />
                             </p>
                         </div>
                         <div data-aos="fade-left" data-aos-duration="400">
@@ -83,7 +117,7 @@ import { UserPen, GraduationCapIcon } from 'lucide-vue-next';
                                 <GraduationCapIcon class="size-20" />
                             </div>
                             <p class="text-center text-6xl font-bold text-purple-500">
-                                5,123+
+                                <Vue3Autocounter ref="alumniRef" :startAmount='0' :endAmount='5123' :duration='1' suffix='+' />
                             </p>
                         </div>
                     </div>
