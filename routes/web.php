@@ -262,9 +262,7 @@ Route::get('/sports', function () {
  * Achievements Section
  */
 Route::get('/academic-achievements', function () {
-    return Inertia::render('CommingSoon', [
-        'title' => "Academic Achievements"
-    ]);
+    return Inertia::render('AcademicAchievements/Index');
 });
 
 
