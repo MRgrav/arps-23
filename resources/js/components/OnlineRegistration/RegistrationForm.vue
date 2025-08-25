@@ -93,15 +93,38 @@ const success = ref(false);
 const submitting = ref(false);
 // ID of the submitted form, used to download PDF
 const submittedId = ref<number | null>(null);
+const errorModel = ref({});
+
 
 // Submit the form using Inertia js Form helper
 const submitForm = () => {
+
+  const maxSize = 1024 * 1024; // 1MB
+  const files = [
+      { name: 'Passport Photo', file: form.passport_photo },
+      { name: 'Marksheet', file: form.marksheet },
+      { name: 'TC Certificate', file: form.tc_certificate },
+      { name: 'Payment Screenshot', file: form.payment_screenshot }
+  ];
+
+  for (const { name, file } of files) {
+      if (file?.size > maxSize) {
+          alert(`${name} is too big (> 1MB)`);
+          return;
+      }
+  }
+
   submitting.value = true;
   form.post(route('online-registration.store'),{
     forceFormData: true,
+    onError: () => {
+      errorModel.value = form.errors ? { ...form.errors } : {};
+      submitting.value = false;
+    },
     onSuccess: (data) => {
       success.value = true;
       form.reset();
+      submitting.value = false;
       // Set the submitted ID from the flash data
       submittedId.value = (data.props.flash && (data.props.flash as any).data.id) ?? null;
     },
@@ -109,6 +132,10 @@ const submitForm = () => {
       submitting.value = false;
     },
   })
+}
+
+const clearErrors = () => {
+  errorModel.value = {};
 }
 </script>
 <template>
@@ -611,4 +638,21 @@ const submitForm = () => {
 
   <!-- Show Success messsage after form submit with PDF download link -->
   <FormSuccess :show="success" @close="success = false" :id="submittedId ?? undefined"/>
+  
+  <!-- Error Modal -->
+<div v-if="Object.keys(errorModel).length" class="fixed inset-0 flex items-center justify-center z-50">
+  <div class="absolute inset-0 bg-black opacity-50"></div>
+  <div class="bg-white rounded-lg shadow-lg max-w-md w-full p-6 z-10">
+    <h2 class="text-lg font-bold text-red-700 mb-4">Please fix the following errors:</h2>
+    <ul class="list-disc list-inside text-red-600">
+      <li v-for="(error, key) in errorModel" :key="key">{{ error }}</li>
+    </ul>
+    <div class="mt-4 flex justify-end">
+      <button @click="clearErrors" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+
 </template>
