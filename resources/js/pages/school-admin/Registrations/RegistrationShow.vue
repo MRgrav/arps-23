@@ -32,12 +32,11 @@ const categories: Record<string, string[]> = {
     'admission_for', 'applicant_name', 'dob', 'gender', 'blood_group', 'only_child',
     'social_category', 'nationality', 'bpl', 'cwsn', 'aadhaar_no', 'udise_no', 'pen_no',
     'email', 'present_class', 'present_school_name', 'present_school_address',
-    'admission_sought_for_class', 'admission_sought_date'
+    'admission_sought_for_class'
   ],
   "Academic Information": [
-    'subject_1', 'subject_1_marks', 'subject_2', 'subject_2_marks', 'subject_3', 'subject_3_marks',
-    'subject_4', 'subject_4_marks', 'subject_5', 'subject_5_marks', 'subject_6', 'subject_6_marks',
-    'subject_7', 'subject_7_marks', 'last_exam_percentage'
+    "total_subjects", "total_marks_obtained", "full_marks", 'last_exam_percentage'
+
   ],
   "Parent’s Information": [
     'parents_category', 'father_name', 'father_occupation', 'father_phone',
@@ -51,14 +50,14 @@ const categories: Record<string, string[]> = {
     'p_street_area_locality', 'p_village_town', 'p_post_office', 'p_pin_code',
     'p_house_no', 'p_state', 'p_district'
   ],
-  "Uploaded Files": ['passport_photo', 'marksheet', 'tc_certificate', 'payment_screenshot'],
+  "Uploaded Files": ['payment_screenshot'],
   "System": ['created_at']
 }
 
 /**
  * List of fields that are file uploads.
  */
-const fileFields = ['passport_photo', 'marksheet', 'tc_certificate', 'payment_screenshot']
+const fileFields = ['payment_screenshot']
 
 /**
  * Converts field names to readable labels.

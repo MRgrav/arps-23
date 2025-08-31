@@ -131,7 +131,6 @@
             'Present School Name' => $registration->present_school_name,
             'Present School Address' => $registration->present_school_address,
             'Admission Sought For Class' => $registration->admission_sought_for_class,
-            'Admission Sought Date' => $registration->admission_sought_date,
             ] as $label => $value)
             <tr>
                 <th>{{ $label }}</th>
@@ -147,49 +146,18 @@
         <h3 class="section-title">Academic Information</h3>
         <table>
             @foreach ([
-            ['Subject 1', $registration->subject_1, $registration->subject_1_marks],
-            ['Subject 2', $registration->subject_2, $registration->subject_2_marks],
-            ['Subject 3', $registration->subject_3, $registration->subject_3_marks],
-            ['Subject 4', $registration->subject_4, $registration->subject_4_marks],
-            ['Subject 5', $registration->subject_5, $registration->subject_5_marks],
-            ['Subject 6', $registration->subject_6, $registration->subject_6_marks],
-            ['Subject 7', $registration->subject_7, $registration->subject_7_marks],
-            ] as [$label, $subject, $marks])
+            'Total Subjects' => $registration->total_subjects,
+            'Total Marks Obtained' => $registration->total_marks_obtained,
+            'Full Marks' => $registration->full_marks,
+            ] as $label => $value)
             <tr>
                 <th>{{ $label }}</th>
-                <td>{{ $subject ?: '-' }}</td>
-                <td style="text-align: right;">{{ $marks ?: '-' }}</td>
+                <td>{{ $value ?: '-' }}</td>
             </tr>
             @endforeach
             <tr>
                 <th>Last Exam %</th>
                 <td>{{ $registration->last_exam_percentage ?? '-' }}%</td>
-                <td>
-                    {{-- Calculate total marks --}}
-                    @php
-                    $totalMarks = 0;
-                    $subjects = [
-                    $registration->subject_1_marks,
-                    $registration->subject_2_marks,
-                    $registration->subject_3_marks,
-                    $registration->subject_4_marks,
-                    $registration->subject_5_marks,
-                    $registration->subject_6_marks,
-                    $registration->subject_7_marks,
-                    ];
-                    foreach ($subjects as $marks) {
-                    if (is_numeric($marks)) {
-                    $totalMarks += $marks;
-                    }
-                    }
-                    @endphp
-                   <table style="width: 100%;">
-                        <tr>
-                            <td style="text-align: left; padding: 0px; border: none;"><strong>Total:</strong></td>
-                            <td style="text-align: right; padding: 0px; border: none;">{{ $totalMarks }}</td>
-                        </tr>
-                    </table>
-                </td>
             </tr>
         </table>
 

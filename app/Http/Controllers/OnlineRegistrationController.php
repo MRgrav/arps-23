@@ -57,24 +57,11 @@ class OnlineRegistrationController extends Controller
             "present_school_name" => "required|string|max:255",
             "present_school_address" => "required|string|max:255",
             "admission_sought_for_class" => "required|in:Nursery,LKG,UKG,CLASS I,CLASS II,CLASS III,CLASS IV,CLASS V,CLASS VI,CLASS VII,CLASS VIII,CLASS IX,CLASS X,CLASS XI,CLASS XII",
-            "admission_sought_date" => "required|date|afterOrEqual:today",
 
             // ACADEMIC INFORMATION
-            "subject_1" => "required|string|max:255",
-            "subject_1_marks" => "required|integer|min:0|max:100",
-            "subject_2" => "required|string|max:255",
-            "subject_2_marks" => "required|integer|min:0|max:100",
-            "subject_3" => "required|string|max:255",
-            "subject_3_marks" => "required|integer|min:0|max:100",
-            "subject_4" => "required|string|max:255",
-            "subject_4_marks" => "required|integer|min:0|max:100",
-            "subject_5" => "required|string|max:255",
-            "subject_5_marks" => "required|integer|min:0|max:100",
-            "subject_6" => "nullable|string|max:255",
-            "subject_6_marks" => "nullable|integer|min:0|max:100",
-            "subject_7" => "nullable|string|max:255",
-            "subject_7_marks" => "nullable|integer|min:0|max:100",
-            "last_exam_percentage" => "required|integer|min:0|max:100",
+            "total_subjects" => "required|integer|min:0|max:20",
+            "total_marks_obtained" => "required|integer|min:0|max:1000",
+            "full_marks" => "required|integer|min:0|max:1000",
 
             // PARENT’S INFORMATION
             "parents_category" => "required|in:CIVILIAN,DEFENCE,RETIRED DEFENCE",
@@ -105,14 +92,20 @@ class OnlineRegistrationController extends Controller
             "p_district" => "required|string|max:255",
 
             // Files (PDFs/Images under 2MB)
-            "passport_photo" => "required|file|mimes:pdf,jpg,jpeg,png|max:2048",
-            "marksheet" => "required|file|mimes:pdf,jpg,jpeg,png|max:2048",
-            "tc_certificate" => "required|file|mimes:pdf,jpg,jpeg,png|max:2048",
             "payment_screenshot" => "required|file|mimes:pdf,jpg,jpeg,png|max:2048"
         ]);
 
+        // Calculate percentage
+        $validated["last_exam_percentage"] = 0;
 
-        $fileFields = ['passport_photo', 'marksheet', 'tc_certificate', 'payment_screenshot'];
+        if ($validated['total_marks_obtained'] > 0 && $validated['full_marks'] > 0) {
+            $validated["last_exam_percentage"] = round(
+                ($validated['total_marks_obtained'] / $validated['full_marks']) * 100,
+                2
+            );
+        }
+
+        $fileFields = ['payment_screenshot'];
         $uuidFilenames = [];
 
         foreach ($fileFields as $field) {

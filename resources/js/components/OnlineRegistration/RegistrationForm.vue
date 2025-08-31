@@ -35,24 +35,12 @@ const form = useForm({
   present_school_name: '',
   present_school_address: '',
   admission_sought_for_class: '',
-  admission_sought_date: '',
+  // admission_sought_date: '',
 
   // academic results
-  subject_1: '',
-  subject_1_marks: '',
-  subject_2: '',
-  subject_2_marks: '',
-  subject_3: '',
-  subject_3_marks: '',
-  subject_4: '',
-  subject_4_marks: '',
-  subject_5: '',
-  subject_5_marks: '',
-  subject_6: '',
-  subject_6_marks: '',
-  subject_7: '',
-  subject_7_marks: '',
-  last_exam_percentage: '',
+  total_subjects: '',
+  total_marks_obtained: '',
+  full_marks: '',
 
   // parents infromation
   parents_category: '',
@@ -82,9 +70,9 @@ const form = useForm({
   p_state: '',
   p_district: '',
 
-  passport_photo: null,
-  marksheet: null,
-  tc_certificate: null,
+  // passport_photo: null,
+  // marksheet: null,
+  // tc_certificate: null,
   payment_screenshot: null,
 })
 
@@ -101,21 +89,21 @@ const submitForm = () => {
 
   const maxSize = 1024 * 1024; // 1MB
   const files = [
-      { name: 'Passport Photo', file: form.passport_photo },
-      { name: 'Marksheet', file: form.marksheet },
-      { name: 'TC Certificate', file: form.tc_certificate },
-      { name: 'Payment Screenshot', file: form.payment_screenshot }
+    // { name: 'Passport Photo', file: form.passport_photo },
+    // { name: 'Marksheet', file: form.marksheet },
+    // { name: 'TC Certificate', file: form.tc_certificate },
+    { name: 'Payment Screenshot', file: form.payment_screenshot }
   ];
 
   for (const { name, file } of files) {
-      if (file?.size > maxSize) {
-          alert(`${name} is too big (> 1MB)`);
-          return;
-      }
+    if (file?.size > maxSize) {
+      alert(`${name} is too big (> 1MB)`);
+      return;
+    }
   }
 
   submitting.value = true;
-  form.post(route('online-registration.store'),{
+  form.post(route('online-registration.store'), {
     forceFormData: true,
     onError: () => {
       errorModel.value = form.errors ? { ...form.errors } : {};
@@ -139,16 +127,21 @@ const clearErrors = () => {
 }
 </script>
 <template>
-  <Loader :open="submitting"/>
+  <Loader :open="submitting" />
   <!-- Show Success messsage after form submit with PDF download link -->
-  <FormSuccess :show="success" @close="success = false" :id="submittedId ?? undefined"/>
+  <FormSuccess :show="success" @close="success = false" :id="submittedId ?? undefined" />
 
   <form @submit.prevent="submitForm" class="space-y-8 p-8">
-    <h1 class="text-xl font-bold text-gray-800">STUDENT REGISTRATION FORM</h1>
+    <h1 class="font-bold text-gray-800">STUDENT REGISTRATION FORM</h1>
+    <p class="text-red-600 font-semibold">Note: At the time of admission, please bring the following:</p>
+    <ul class="list-disc list-inside text-red-600">
+      <li>Passport-size photo</li>
+      <li>Marksheet</li>
+      <li>TC certificate</li>
+    </ul>
 
-    <!-- STUDENT’S INFORMATION -->
     <div class="space-y-4">
-      <p class="text-red-600">(FILL IN CAPITAL LETTERS ONLY)</p>
+      <!-- STUDENT’S INFORMATION -->
       <h3 class="text-lg font-semibold text-white bg-sky-400 p-2">STUDENT’S INFORMATION</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="space-y-1">
@@ -169,12 +162,12 @@ const clearErrors = () => {
         </div>
         <div class="space-y-1">
           <Label for="applicant_name">Applicant Name: *</Label>
-          <Input id="applicant_name" v-model="form.applicant_name" placeholder="APPLICANT NAME" required/>
+          <Input id="applicant_name" v-model="form.applicant_name" placeholder="APPLICANT NAME" required />
           <div class="text-sm text-red-500" v-if="form.errors.applicant_name">{{ form.errors.applicant_name }}</div>
         </div>
         <div class="space-y-1">
           <Label for="dob">Date of Birth ( MM-DD-YYYY ): *</Label>
-          <Input type="date" id="dob" v-model="form.dob" required/>
+          <Input type="date" id="dob" v-model="form.dob" required />
           <div class="text-sm text-red-500" v-if="form.errors.dob">{{ form.errors.dob }}</div>
         </div>
         <div class="space-y-1">
@@ -294,7 +287,7 @@ const clearErrors = () => {
         </div>
         <div class="space-y-1">
           <Label for="aadhaar_no">Aadhaar Number (12 Digit): *</Label>
-          <Input id="aadhaar_no" v-model="form.aadhaar_no" placeholder="AADHAAR NUMBER" required/>
+          <Input id="aadhaar_no" v-model="form.aadhaar_no" placeholder="AADHAAR NUMBER" required />
           <div class="text-sm text-red-500" v-if="form.errors.aadhaar_no">{{ form.errors.aadhaar_no }}</div>
         </div>
         <div class="space-y-1">
@@ -309,23 +302,27 @@ const clearErrors = () => {
         </div>
         <div class="space-y-1">
           <Label for="email">Email Address: *</Label>
-          <Input id="email" v-model="form.email" placeholder="EMAIL ADDRESS" required/>
+          <Input id="email" v-model="form.email" placeholder="EMAIL ADDRESS" required />
           <div class="text-sm text-red-500" v-if="form.errors.email">{{ form.errors.email }}</div>
         </div>
         <div class="space-y-1">
           <Label for="present_class">Present Class: *</Label>
-          <Input id="present_class" v-model="form.present_class" placeholder="PRESENT CLASS" required/>
+          <Input id="present_class" v-model="form.present_class" placeholder="PRESENT CLASS" required />
           <div class="text-sm text-red-500" v-if="form.errors.present_class">{{ form.errors.present_class }}</div>
         </div>
         <div class="space-y-1">
           <Label for="present_school_name">Present School Name: *</Label>
-          <Input id="present_school_name" v-model="form.present_school_name" placeholder="PRESENT SCHOOL NAME" required/>
-          <div class="text-sm text-red-500" v-if="form.errors.present_school_name">{{ form.errors.present_school_name }}</div>
+          <Input id="present_school_name" v-model="form.present_school_name" placeholder="PRESENT SCHOOL NAME"
+            required />
+          <div class="text-sm text-red-500" v-if="form.errors.present_school_name">{{ form.errors.present_school_name }}
+          </div>
         </div>
         <div class="space-y-1">
           <Label for="present_school_address">Present School Address: *</Label>
-          <Input id="present_school_address" v-model="form.present_school_address" placeholder="PRESENT SCHOOL ADDRESS" required />
-          <div class="text-sm text-red-500" v-if="form.errors.present_school_address">{{ form.errors.present_school_address }}</div>
+          <Input id="present_school_address" v-model="form.present_school_address" placeholder="PRESENT SCHOOL ADDRESS"
+            required />
+          <div class="text-sm text-red-500" v-if="form.errors.present_school_address">{{
+            form.errors.present_school_address }}</div>
         </div>
         <div class="space-y-1">
           <Label for="admission_sought_for_class">Admission sought for Class: *</Label>
@@ -353,18 +350,19 @@ const clearErrors = () => {
               </SelectGroup>
             </SelectContent>
           </Select>
-          <div class="text-sm text-red-500" v-if="form.errors.admission_sought_for_class">{{ form.errors.admission_sought_for_class }}</div>
+          <div class="text-sm text-red-500" v-if="form.errors.admission_sought_for_class">{{
+            form.errors.admission_sought_for_class }}</div>
         </div>
-        <div class="space-y-1">
+        <!-- <div class="space-y-1">
           <Label for="admission_sought_date">Admission sought for the Year ( MM-DD-YYYY ): *</Label>
           <Input type="date" id="admission_sought_date" v-model="form.admission_sought_date" required/>
           <div class="text-sm text-red-500" v-if="form.errors.admission_sought_date">{{ form.errors.admission_sought_date }}</div>
-        </div>
+        </div> -->
       </div>
     </div>
 
-    <!-- ACADEMIC INFORMATION -->
-    <div class="space-y-4">
+    <!-- ACADEMIC INFORMATION OLD-->
+    <!-- <div class="space-y-4">
       <h3  class="text-lg font-semibold text-white bg-sky-400 p-2">ACADEMIC INFORMATION</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="space-y-1">
@@ -449,15 +447,42 @@ const clearErrors = () => {
           <div class="text-sm text-red-500" v-if="form.errors.last_exam_percentage">{{ form.errors.last_exam_percentage }}</div>
         </div>
       </div>
+    </div> -->
+
+    <!-- ACADEMIC INFORMATION -->
+    <div class="space-y-4">
+      <h3 class="text-lg font-semibold text-white bg-sky-400 p-2">ACADEMIC INFORMATION</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="space-y-1">
+          <Label for="total_subjects">Total Subjects: *</Label>
+          <Input type="number" id="total_subjects" v-model="form.total_subjects" placeholder="NUMBER OF SUBJECTS"
+            required />
+          <div class="text-sm text-red-500" v-if="form.errors.total_subjects">{{ form.errors.total_subjects }}</div>
+        </div>
+
+        <div class="space-y-1">
+          <Label for="total_marks_obtained">Total Marks Obtained: *</Label>
+          <Input type="number" id="total_marks_obtained" v-model="form.total_marks_obtained"
+            placeholder="TOTAL MARKS OBTAINED" required />
+          <div class="text-sm text-red-500" v-if="form.errors.total_marks_obtained">{{ form.errors.total_marks_obtained
+          }}</div>
+        </div>
+        <div class="space-y-1">
+          <Label for="full_marks">Full Marks: *</Label>
+          <Input type="number" id="full_marks" v-model="form.full_marks" placeholder="FULL MARKS" required />
+          <div class="text-sm text-red-500" v-if="form.errors.full_marks">{{ form.errors.full_marks }}</div>
+        </div>
+      </div>
     </div>
+
 
     <!-- PARENT’S INFORMATION -->
     <div class="space-y-4">
-      <h3  class="text-lg font-semibold text-white bg-sky-400 p-2">PARENT’S INFORMATION</h3>
+      <h3 class="text-lg font-semibold text-white bg-sky-400 p-2">PARENT’S INFORMATION</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="space-y-1">
           <Label for="category">Category: *</Label>
-            <Select id="category" v-model="form.parents_category" required>
+          <Select id="category" v-model="form.parents_category" required>
             <SelectTrigger class="form-select w-full">
               <SelectValue placeholder="-- Select --" />
             </SelectTrigger>
@@ -473,37 +498,39 @@ const clearErrors = () => {
         </div>
         <div class="space-y-1">
           <Label for="father_name">Father's Name: *</Label>
-          <Input id="father_name" v-model="form.father_name" placeholder="FATHER'S NAME" required/>
+          <Input id="father_name" v-model="form.father_name" placeholder="FATHER'S NAME" required />
           <div class="text-sm text-red-500" v-if="form.errors.father_name">{{ form.errors.father_name }}</div>
         </div>
         <div class="space-y-1">
           <Label for="father_occupation">Father's Occupation: *</Label>
-          <Input id="father_occupation" v-model="form.father_occupation" placeholder="FATHER'S OCCUPATION" required/>
-          <div class="text-sm text-red-500" v-if="form.errors.father_occupation">{{ form.errors.father_occupation }}</div>
+          <Input id="father_occupation" v-model="form.father_occupation" placeholder="FATHER'S OCCUPATION" required />
+          <div class="text-sm text-red-500" v-if="form.errors.father_occupation">{{ form.errors.father_occupation }}
+          </div>
         </div>
         <div class="space-y-1">
           <Label for="father_phone">Father's Phone: *</Label>
-          <Input id="father_phone" v-model="form.father_phone" placeholder="FATHER'S PHONE" required/>
+          <Input id="father_phone" v-model="form.father_phone" placeholder="FATHER'S PHONE" required />
           <div class="text-sm text-red-500" v-if="form.errors.father_phone">{{ form.errors.father_phone }}</div>
         </div>
         <div class="space-y-1">
           <Label for="mother_name">Mother's Name: *</Label>
-          <Input id="mother_name" v-model="form.mother_name" placeholder="MOTHER'S NAME" required/>
+          <Input id="mother_name" v-model="form.mother_name" placeholder="MOTHER'S NAME" required />
           <div class="text-sm text-red-500" v-if="form.errors.mother_name">{{ form.errors.mother_name }}</div>
         </div>
         <div class="space-y-1">
           <Label for="mother_occupation">Mother's Occupation: *</Label>
-          <Input id="mother_occupation" v-model="form.mother_occupation" placeholder="MOTHER'S OCCUPATION" required/>
-          <div class="text-sm text-red-500" v-if="form.errors.mother_occupation">{{ form.errors.mother_occupation }}</div>
+          <Input id="mother_occupation" v-model="form.mother_occupation" placeholder="MOTHER'S OCCUPATION" required />
+          <div class="text-sm text-red-500" v-if="form.errors.mother_occupation">{{ form.errors.mother_occupation }}
+          </div>
         </div>
         <div class="space-y-1">
           <Label for="mother_phone">Mother's Phone: *</Label>
-          <Input id="mother_phone" v-model="form.mother_phone" placeholder="MOTHER'S PHONE" required/>
+          <Input id="mother_phone" v-model="form.mother_phone" placeholder="MOTHER'S PHONE" required />
           <div class="text-sm text-red-500" v-if="form.errors.mother_phone">{{ form.errors.mother_phone }}</div>
         </div>
         <div class="space-y-1">
           <Label for="annual_income">Annual Income: *</Label>
-          <Input id="annual_income" v-model="form.annual_income" placeholder="ANNUAL INCOME" required/>
+          <Input id="annual_income" v-model="form.annual_income" placeholder="ANNUAL INCOME" required />
           <div class="text-sm text-red-500" v-if="form.errors.annual_income">{{ form.errors.annual_income }}</div>
         </div>
       </div>
@@ -511,26 +538,28 @@ const clearErrors = () => {
 
     <!--CURRENT ADDRESS -->
     <div class="space-y-4">
-      <h3  class="text-base font-medium text-white bg-slate-400 p-1">CURRENT ADDRESS DETAILS</h3>
+      <h3 class="text-base font-medium text-white bg-slate-400 p-1">CURRENT ADDRESS DETAILS</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="space-y-1">
           <Label for="c_street_area_locality">Street/Area/Locality: *</Label>
-          <Input id="c_street_area_locality" v-model="form.c_street_area_locality" placeholder="STREET/AREA/LOCALITY" required/>
-          <div class="text-sm text-red-500" v-if="form.errors.c_street_area_locality">{{ form.errors.c_street_area_locality }}</div>
+          <Input id="c_street_area_locality" v-model="form.c_street_area_locality" placeholder="STREET/AREA/LOCALITY"
+            required />
+          <div class="text-sm text-red-500" v-if="form.errors.c_street_area_locality">{{
+            form.errors.c_street_area_locality }}</div>
         </div>
         <div class="space-y-1">
           <Label for="c_village_town">Village/Town: *</Label>
-          <Input id="c_village_town" v-model="form.c_village_town" placeholder="VILLAGE/TOWN" required/>
+          <Input id="c_village_town" v-model="form.c_village_town" placeholder="VILLAGE/TOWN" required />
           <div class="text-sm text-red-500" v-if="form.errors.c_village_town">{{ form.errors.c_village_town }}</div>
         </div>
         <div class="space-y-1">
           <Label for="c_post_office">Post Office: *</Label>
-          <Input id="c_post_office" v-model="form.c_post_office" placeholder="POST OFFICE" required/>
+          <Input id="c_post_office" v-model="form.c_post_office" placeholder="POST OFFICE" required />
           <div class="text-sm text-red-500" v-if="form.errors.c_post_office">{{ form.errors.c_post_office }}</div>
         </div>
         <div class="space-y-1">
           <Label for="c_pin_code">Pin Code: *</Label>
-          <Input id="c_pin_code" v-model="form.c_pin_code" placeholder="PIN CODE" required/>
+          <Input id="c_pin_code" v-model="form.c_pin_code" placeholder="PIN CODE" required />
           <div class="text-sm text-red-500" v-if="form.errors.c_pin_code">{{ form.errors.c_pin_code }}</div>
         </div>
         <div class="space-y-1">
@@ -540,12 +569,12 @@ const clearErrors = () => {
         </div>
         <div class="space-y-1">
           <Label for="c_state">State: *</Label>
-          <Input id="c_state" v-model="form.c_state" placeholder="STATE" required/>
+          <Input id="c_state" v-model="form.c_state" placeholder="STATE" required />
           <div class="text-sm text-red-500" v-if="form.errors.c_state">{{ form.errors.c_state }}</div>
         </div>
         <div class="space-y-1">
           <Label for="c_district">District: *</Label>
-          <Input id="c_district" v-model="form.c_district" placeholder="DISTRICT" required/>
+          <Input id="c_district" v-model="form.c_district" placeholder="DISTRICT" required />
           <div class="text-sm text-red-500" v-if="form.errors.c_district">{{ form.errors.c_district }}</div>
         </div>
       </div>
@@ -553,48 +582,50 @@ const clearErrors = () => {
 
     <!--PERMANENT ADDRESS -->
     <div class="space-y-4">
-      <h3  class="text-base font-medium text-white bg-slate-400 p-1">PERMANENT ADDRESS DETAILS</h3>
+      <h3 class="text-base font-medium text-white bg-slate-400 p-1">PERMANENT ADDRESS DETAILS</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="space-y-1">
           <Label for="p_street_area_locality">Street/Area/Locality: *</Label>
-          <Input id="p_street_area_locality" v-model="form.p_street_area_locality" placeholder="STREET/AREA/LOCALITY" required/>
-          <div class="text-sm text-red-500" v-if="form.errors.p_street_area_locality">{{ form.errors.p_street_area_locality }}</div>
+          <Input id="p_street_area_locality" v-model="form.p_street_area_locality" placeholder="STREET/AREA/LOCALITY"
+            required />
+          <div class="text-sm text-red-500" v-if="form.errors.p_street_area_locality">{{
+            form.errors.p_street_area_locality }}</div>
         </div>
         <div class="space-y-1">
           <Label for="p_village_town">Village/Town: *</Label>
-          <Input id="p_village_town" v-model="form.p_village_town" placeholder="VILLAGE/TOWN" required/>
+          <Input id="p_village_town" v-model="form.p_village_town" placeholder="VILLAGE/TOWN" required />
           <div class="text-sm text-red-500" v-if="form.errors.p_village_town">{{ form.errors.p_village_town }}</div>
         </div>
         <div class="space-y-1">
           <Label for="p_post_office">Post Office: *</Label>
-          <Input id="p_post_office" v-model="form.p_post_office" placeholder="POST OFFICE" required/>
+          <Input id="p_post_office" v-model="form.p_post_office" placeholder="POST OFFICE" required />
           <div class="text-sm text-red-500" v-if="form.errors.p_post_office">{{ form.errors.p_post_office }}</div>
         </div>
         <div class="space-y-1">
           <Label for="p_pin_code">Pin Code: *</Label>
-          <Input id="p_pin_code" v-model="form.p_pin_code" placeholder="PIN CODE" required/>
+          <Input id="p_pin_code" v-model="form.p_pin_code" placeholder="PIN CODE" required />
           <div class="text-sm text-red-500" v-if="form.errors.p_pin_code">{{ form.errors.p_pin_code }}</div>
         </div>
         <div class="space-y-1">
           <Label for="p_house_no">House No:</Label>
-          <Input id="p_house_no" v-model="form.p_house_no" placeholder="HOUSE NO"/>
+          <Input id="p_house_no" v-model="form.p_house_no" placeholder="HOUSE NO" />
           <div class="text-sm text-red-500" v-if="form.errors.p_house_no">{{ form.errors.p_house_no }}</div>
         </div>
         <div class="space-y-1">
           <Label for="p_state">State: *</Label>
-          <Input id="p_state" v-model="form.p_state" placeholder="STATE" required/>
+          <Input id="p_state" v-model="form.p_state" placeholder="STATE" required />
           <div class="text-sm text-red-500" v-if="form.errors.p_state">{{ form.errors.p_state }}</div>
         </div>
         <div class="space-y-1">
           <Label for="p_district">District: *</Label>
-          <Input id="p_district" v-model="form.p_district" placeholder="DISTRICT" required/>
+          <Input id="p_district" v-model="form.p_district" placeholder="DISTRICT" required />
           <div class="text-sm text-red-500" v-if="form.errors.p_district">{{ form.errors.p_district }}</div>
         </div>
       </div>
     </div>
 
     <!-- DOCUMENTS -->
-    <div class="space-y-4">
+    <!-- <div class="space-y-4">
       <h3  class="text-lg font-semibold text-white bg-sky-400 p-2">UPLOAD DOCUMENTS</h3>
       <div class="grid grid-cols-1 gap-5">
         <div class="space-y-1">
@@ -614,45 +645,47 @@ const clearErrors = () => {
         </div>
 
       </div>
-    </div>
+    </div> -->
 
     <!-- PAYMENT -->
     <div class="space-y-4">
-      <h3  class="text-lg font-semibold text-white bg-sky-400 p-2">PAYMENT SCREENSHOT</h3>
+      <h3 class="text-lg font-semibold text-white bg-sky-400 p-2">PAYMENT SCREENSHOT</h3>
       <Img src="storage/uploads/arps-upi-qr.jpg"></Img>
       <h4>Please pay Rs 200 by Scanning the QR code using any UPI Payments app</h4>
       <div class="space-y-1">
         <Label for="payment_screenshot">Upload Screenshot: (Format - jpg,png,jpeg,pdf | Size - max 1 mb)*</Label>
-        <Input id="payment_screenshot" type="file"  @input="form.payment_screenshot = $event.target.files[0]" required/>
-        <div class="text-sm text-red-500" v-if="form.errors.payment_screenshot">{{ form.errors.payment_screenshot }}</div>
+        <Input id="payment_screenshot" type="file" @input="form.payment_screenshot = $event.target.files[0]" required />
+        <div class="text-sm text-red-500" v-if="form.errors.payment_screenshot">{{ form.errors.payment_screenshot }}
+        </div>
       </div>
     </div>
 
     <!-- SUBMIT BUTTON -->
     <div class="flex justify-end mt-6">
-      <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700" :disabled="form.processing">
+      <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        :disabled="form.processing">
         Submit
       </button>
     </div>
   </form>
 
   <!-- Show Success messsage after form submit with PDF download link -->
-  <FormSuccess :show="success" @close="success = false" :id="submittedId ?? undefined"/>
-  
+  <FormSuccess :show="success" @close="success = false" :id="submittedId ?? undefined" />
+
   <!-- Error Modal -->
-<div v-if="Object.keys(errorModel).length" class="fixed inset-0 flex items-center justify-center z-50">
-  <div class="absolute inset-0 bg-black opacity-50"></div>
-  <div class="bg-white rounded-lg shadow-lg max-w-md w-full p-6 z-10">
-    <h2 class="text-lg font-bold text-red-700 mb-4">Please fix the following errors:</h2>
-    <ul class="list-disc list-inside text-red-600">
-      <li v-for="(error, key) in errorModel" :key="key">{{ error }}</li>
-    </ul>
-    <div class="mt-4 flex justify-end">
-      <button @click="clearErrors" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
-        Close
-      </button>
+  <div v-if="Object.keys(errorModel).length" class="fixed inset-0 flex items-center justify-center z-50">
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+    <div class="bg-white rounded-lg shadow-lg max-w-md w-full p-6 z-10">
+      <h2 class="text-lg font-bold text-red-700 mb-4">Please fix the following errors:</h2>
+      <ul class="list-disc list-inside text-red-600">
+        <li v-for="(error, key) in errorModel" :key="key">{{ error }}</li>
+      </ul>
+      <div class="mt-4 flex justify-end">
+        <button @click="clearErrors" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+          Close
+        </button>
+      </div>
     </div>
   </div>
-</div>
 
 </template>
