@@ -230,22 +230,22 @@ Route::get('/medical-care', function () {
  */
 Route::prefix('/house')->group(function () {
     Route::get('/gandhi', function () {
-        return Inertia::render('CommingSoon', [
+        return Inertia::render('GandhiHouse', [
             'title' => "Gandhi House"
         ]);
     });
     Route::get('/nehru', function () {
-        return Inertia::render('CommingSoon', [
+        return Inertia::render('NehruHouse', [
             'title' => "Nehru House"
         ]);
     });
     Route::get('/subhash', function () {
-        return Inertia::render('CommingSoon', [
+        return Inertia::render('SubhashHouse', [
             'title' => "Subhash House"
         ]);
     });
     Route::get('/tagore', function () {
-        return Inertia::render('CommingSoon', [
+        return Inertia::render('TagoreHouse', [
             'title' => "Tagore House"
         ]);
     });
