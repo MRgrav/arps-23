@@ -91,6 +91,11 @@ Route::get('/subjects-offered', function () {
     ]);
 });
 
+Route::get('/cbse', function () {
+    return Inertia::render('CBSE/Index', [
+        'title' => "CBSE"
+    ]);
+});
 
 /**
  * Non Academic Section

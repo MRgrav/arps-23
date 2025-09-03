@@ -52,6 +52,10 @@ const AcademicItems: NavItem[] = [
         title: 'Subjects Offered',
         href: '/subjects-offered',
     },
+    {
+        title: 'CBSE',
+        href: '/cbse',
+    },
 ];
 
 // Non-Academic navigation items
