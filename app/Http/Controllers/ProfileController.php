@@ -54,8 +54,9 @@ class ProfileController extends Controller
             $extension = $request->file('image')->getClientOriginalExtension();
             $filename = Str::uuid()->toString() . '.' . $extension;
 
-            // Store in public/uploads
-            $request->file('image')->storeAs('uploads', $filename, 'public');
+            // Store in minio
+            $request->file('image')->storeAs('uploads', $filename, 's3');
+
 
             $data['image'] = $filename;
         }
@@ -115,8 +116,8 @@ class ProfileController extends Controller
             $extension = $request->file('image')->getClientOriginalExtension();
             $filename = Str::uuid()->toString() . '.' . $extension;
 
-            // Store in public/uploads
-            $request->file('image')->storeAs('uploads', $filename, 'public');
+            // Store in minio
+            $request->file('image')->storeAs('uploads', $filename, 's3');
 
             $validated['image'] = $filename;
         }else {

@@ -1,0 +1,1 @@
+export const S3_ENDPOINT="http://kyren.root.sx:9000/arps";

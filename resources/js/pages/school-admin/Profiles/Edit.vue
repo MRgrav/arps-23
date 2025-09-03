@@ -6,6 +6,7 @@ import { Head, useForm, Link } from '@inertiajs/vue3';
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectItem } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
+import { S3_ENDPOINT } from '@/data/Index';
 
 const props = defineProps<{
   profile: Profile,
@@ -112,7 +113,7 @@ const submit = () => {
           <div v-if="form.errors.image" class="text-red-500 text-sm">{{ form.errors.image }}</div>
 
           <div class="mt-2">
-            <img :src="`/storage/uploads/${props.profile.image}`" alt="Current Profile" class="w-20 h-20 rounded-full object-cover" />
+            <img :src="`${S3_ENDPOINT}/uploads/${props.profile.image}`" alt="Current Profile" class="w-20 h-20 rounded-full object-cover" />
           </div>
         </div>
 
