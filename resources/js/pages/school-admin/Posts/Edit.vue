@@ -49,7 +49,7 @@ const submit = () => {
           <div v-if="form.errors.image" class="text-red-500 text-sm">{{ form.errors.image }}</div>
 
           <div class="mt-2">
-            <img :src="`/storage/uploads/${props.post.image}`" alt="Current Profile" class="w-50 h-50 object-cover" />
+            <img :src="`/storage/uploads/${props.post.image}`" alt="Current Image" class="w-50 h-50 object-cover" />
           </div>
         </div>
 
