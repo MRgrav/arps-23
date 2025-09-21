@@ -49,7 +49,7 @@ class OnlineRegistrationController extends Controller
             "nationality" => "required|in:INDIAN,OTHER",
             "bpl" => "required|in:Yes,No",
             "cwsn" => "required|in:Yes,No",
-            "aadhaar_no" => "required|integer|digits:12",
+            "aadhaar_no" => "required|digits:12",
             "udise_no" => "nullable|string",
             "pen_no" => "nullable|string",
             "email" => "required|email|max:255",
@@ -95,6 +95,18 @@ class OnlineRegistrationController extends Controller
             "payment_screenshot" => "required|file|mimes:pdf,jpg,jpeg,png|max:2048"
         ]);
 
+        // Check if same Aadhaar + same class already exists
+        $exists = Registration::where('aadhaar_no', $validated['aadhaar_no'])
+            ->where('admission_sought_for_class', $validated['admission_sought_for_class'])
+            ->exists();
+
+        if ($exists) {
+            return redirect()
+                ->back()
+                ->withErrors(['aadhaar_no' => 'A student with Aadhaar number ' . $validated['aadhaar_no'] . ' is already registered for class ' . $validated['admission_sought_for_class'] . '.'])
+                ->withInput();
+        }
+
         // Calculate percentage
         $validated["last_exam_percentage"] = 0;
 
@@ -116,7 +128,7 @@ class OnlineRegistrationController extends Controller
                 $filename = $uuid . '.' . $ext;
 
                 // Store file in storage/app/public/online-registration/uploads/
-                $file->storeAs('online-registration/uploads', $filename, 'public');
+                $file->storeAs('online-registration/uploads', $filename, 's3');
 
                 // Save only the filename in DB
                 $uuidFilenames[$field] = $filename;
@@ -202,7 +214,7 @@ class OnlineRegistrationController extends Controller
     {
         $registration = Registration::findOrFail($id);
 
-        // Generate the PDF (if not already)
+        // Generate the PDF
         $this->generatePdf($registration);
 
         // Define the filename
@@ -253,5 +265,24 @@ class OnlineRegistrationController extends Controller
         $this->sendRegistrationMail($registration);
 
         return response()->json(['message' => 'Test mail sent successfully!']);
+    }
+
+    /**
+     * Search method to search previous submissions
+     */
+    public function search(Request $request)
+    {
+        $validated = $request->validate([
+            "dob" => "required|date|before:today",
+            "aadhaar_no" => "required|digits:12",
+        ]);
+
+        $registrations = Registration::where('aadhaar_no', $validated['aadhaar_no'])
+        ->where('dob', $validated['dob'])
+        ->get();
+
+        return Inertia::render('Registrations/SearchResult', [
+            'registrations' => $registrations
+        ]);
     }
 }

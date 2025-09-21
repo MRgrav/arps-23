@@ -13,6 +13,7 @@ import {
   SelectValue,
 } from '../ui/select';
 import Loader from './Loader.vue';
+import Button from '../ui/button/Button.vue';
 
 // Online Registration Form Object
 const form = useForm({
@@ -125,13 +126,52 @@ const submitForm = () => {
 const clearErrors = () => {
   errorModel.value = {};
 }
+
+const searchForm = useForm({
+  //student information
+  dob: '',
+  aadhaar_no: '',
+});
+
+// Search the form
+const search = () => {
+  searchForm.post(route('online-registration.search'), {
+    onSuccess: (data) => {
+      form.reset();
+    },
+    onError: () => {
+      errorModel.value = form.errors ? { ...form.errors } : {};
+      submitting.value = false;
+    },
+  })
+}
 </script>
 <template>
   <Loader :open="submitting" />
   <!-- Show Success messsage after form submit with PDF download link -->
   <FormSuccess :show="success" @close="success = false" :id="submittedId ?? undefined" />
 
-  <form @submit.prevent="submitForm" class="space-y-8 p-8">
+  <form @submit.prevent="search" class="p-8 lg:p-16 bg-neutral-100">
+    <h2 class="mb-8">Download Registration Form</h2>
+    <div class="gap-8 grid grid-cols-1 md:grid-cols-4 place-content-center">
+      <div class="space-y-1 md:col-span-2">
+        <Label for="search_aadhaar_no">Aadhaar Number (12 Digit): *</Label>
+        <Input id="search_aadhaar_no" v-model="searchForm.aadhaar_no" placeholder="AADHAAR NUMBER" required class="bg-white" />
+        <div class="text-sm text-red-500" v-if="searchForm.errors.aadhaar_no">{{ searchForm.errors.aadhaar_no }}</div>
+      </div>
+      <div class="space-y-1 col-span-1">
+        <Label for="search_dob">Date of Birth (MM-DD-YYYY): *</Label>
+        <Input type="date" id="search_dob" v-model="searchForm.dob" required class="bg-white" />
+        <div class="text-sm text-red-500" v-if="searchForm.errors.dob">{{ searchForm.errors.dob }}</div>
+      </div>
+      <div>
+        <Label class="opacity-0">Search</Label>
+        <Button type="submit" class="w-full">Search</Button>
+      </div>
+    </div>
+  </form>
+
+  <form @submit.prevent="submitForm" class="space-y-8 p-8 lg:p-16">
     <h1 class="font-bold text-gray-800">STUDENT REGISTRATION FORM</h1>
     <p class="text-red-600 font-semibold">Note: At the time of admission, please bring the following:</p>
     <ul class="list-disc list-inside text-red-600">
@@ -465,7 +505,7 @@ const clearErrors = () => {
           <Input type="number" id="total_marks_obtained" v-model="form.total_marks_obtained"
             placeholder="TOTAL MARKS OBTAINED" required />
           <div class="text-sm text-red-500" v-if="form.errors.total_marks_obtained">{{ form.errors.total_marks_obtained
-          }}</div>
+            }}</div>
         </div>
         <div class="space-y-1">
           <Label for="full_marks">Full Marks: *</Label>

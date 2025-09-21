@@ -143,6 +143,12 @@ Route::controller(OnlineRegistrationController::class)->group(function () {
 
     Route::post('/online-registration', 'store')
         ->name('online-registration.store');
+
+    Route::post('/online-registration/search', 'search')
+        ->name('online-registration.search');
+    Route::get('/online-registration/search', function() {
+        return redirect('/online-registration');
+    });
 });
 
 Route::get('/admission-procedure', function () {

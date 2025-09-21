@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Button from '@/components/ui/button/Button.vue'
+import { S3_ENDPOINT } from '@/data/Index'
 import SchoolAdminLayout from '@/layouts/SchoolAdminLayout.vue'
 import { Head } from '@inertiajs/vue3'
 import { ref, onMounted, onBeforeUnmount } from 'vue'
@@ -143,7 +144,7 @@ onBeforeUnmount(() => {
                   <template v-if="props.registration[field]">
                     <template v-if="props.registration[field].toLowerCase().endsWith('.pdf')">
                       <a
-                        :href="`/storage/online-registration/uploads/${props.registration[field]}`"
+                        :href="`${S3_ENDPOINT}/online-registration/uploads/${props.registration[field]}`"
                         target="_blank"
                         class="text-blue-600 underline"
                       >
@@ -152,10 +153,10 @@ onBeforeUnmount(() => {
                     </template>
                     <template v-else>
                       <img
-                        :src="`/storage/online-registration/uploads/${props.registration[field]}`"
+                        :src="`${S3_ENDPOINT}/online-registration/uploads/${props.registration[field]}`"
                         class="h-24 rounded border cursor-pointer hover:opacity-80"
                         :alt="getLabel(field)"
-                        @click="openImage(`/storage/online-registration/uploads/${props.registration[field]}`)"
+                        @click="openImage(`${S3_ENDPOINT}/online-registration/uploads/${props.registration[field]}`)"
                       />
                     </template>
                   </template>

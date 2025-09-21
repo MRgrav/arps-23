@@ -1,1 +1,1 @@
-export const S3_ENDPOINT="http://kyren.root.sx:9000/arps";
+export const S3_ENDPOINT="https://minio-hc4.deolang.com/arpsjorhat";
