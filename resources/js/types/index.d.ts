@@ -96,6 +96,7 @@ export interface Post {
   id: number;
   title: string;
   image: string;
+  images: [];
   content?: string | null;
   created_at?: string;
   updated_at?: string;
