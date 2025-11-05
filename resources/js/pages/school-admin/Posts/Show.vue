@@ -4,6 +4,7 @@ import { type BreadcrumbItem, Post } from '@/types';
 import { Head, Link } from '@inertiajs/vue3';
 import Button from '@/components/ui/button/Button.vue';
 import defaultProfileIcon from '@/../../resources/images/defaults/profile.png';
+import ImageGallery from '@/components/kisxo/ImageGallery.vue';
 
 const props = defineProps<{ post: Post }>();
 
@@ -63,6 +64,8 @@ const handleImageError = (event: Event) => {
       <div class="text-gray-700 dark:text-gray-300 whitespace-pre-line">
         {{ props.post.content || 'No message provided.'}}
       </div>
+
+      <ImageGallery :images="props.post.images" />
 
     </div>
   </SchoolAdminLayout>
